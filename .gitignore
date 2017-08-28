@@ -1,0 +1,7 @@
+env
+secrets.sh
+*.pyc
+*.DS_Store
+package*
+node_modules/
+ghostdriver.log
