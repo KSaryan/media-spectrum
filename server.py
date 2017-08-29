@@ -57,6 +57,10 @@ def get_time():
     now = time.time()
 
     return str(now)
+
+@app.route('/word_cloud')
+def show_word_cloud():
+	return render_template('wordcloud.html')
 # @app.route('/get_screenshot')
 # def get_screenshot():
 #     filename = request.args.get('url').rstrip('.com') + '.png'
