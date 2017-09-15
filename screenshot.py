@@ -1,6 +1,7 @@
 import os
 from subprocess import Popen, PIPE
 from selenium import webdriver
+import time
 
 abspath = lambda *p: os.path.abspath(os.path.join(*p))
 ROOT = abspath(os.path.dirname(__file__))
@@ -15,6 +16,7 @@ def execute_command(command):
 def do_screen_capturing(url, screen_path, width, height):
     print "Capturing screen.."
     driver = webdriver.PhantomJS()
+    time.sleep(1)
     # it save service log file in same directory
     # if you want to have log file stored else where
     # initialize the webdriver.PhantomJS() as
@@ -23,6 +25,7 @@ def do_screen_capturing(url, screen_path, width, height):
     if width and height:
         driver.set_window_size(width, height)
     driver.get(url)
+    time.sleep(40)
     driver.save_screenshot(screen_path)
 
 

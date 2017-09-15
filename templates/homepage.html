@@ -8,9 +8,11 @@
 </head>
 
 <body>
-  <button data-url='nytimes' class='npbtn'> New York Times </button> 
-  <button data-url='foxnews' class='npbtn'> Fox News </button> 
-  <div id='display-div'> </div>
+	{% for site in sites %}
+	 	<button data-url= {{ sites[site]['pic'] }} class='npbtn'> {{sites[site]['name']}} </button> 
+  	{% endfor %}
+
+  	<div id='screenshot-display-div'> </div>
 
   
 

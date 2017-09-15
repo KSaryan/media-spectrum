@@ -2,9 +2,8 @@ var url;
 
 function getScreenShot(result){
 
-	var src = "/static/img/thumbnail_" + url + ".png?" + result;
-	console.log(src)
-	$('#display-div').prepend($('<img>',{id:'theImg',src: src}));
+	var src = "/static/img/thumbnail_" + url + "?" + result;
+	$('#screenshot-display-div').prepend($('<img>',{id:'theImg',src: src}));
 }
 
 function getTime(){

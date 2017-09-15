@@ -14,10 +14,15 @@ from screenshot import *
 from subprocess import Popen, PIPE
 from selenium import webdriver
 import time
+from count import count_words, count_one_word
+from sites import SITES_TO_VISIT
 
 
 app = Flask(__name__)
 app.secret_key = "ABC"
+
+
+
 
 
 
@@ -50,7 +55,7 @@ app.secret_key = "ABC"
 @app.route('/')
 def display_homepage():
     """Displas hoempage"""
-    return render_template('homepage.html')
+    return render_template('homepage.html', sites=SITES_TO_VISIT)
 
 @app.route('/get_time')
 def get_time():
@@ -60,13 +65,40 @@ def get_time():
 
 @app.route('/word_cloud')
 def show_word_cloud():
-	return render_template('wordcloud.html')
+	return render_template('wordcloud.html', sites=SITES_TO_VISIT)
+
+@app.route('/word_cloud.json')
+def get_word_cloud_info():
+	key = request.args.get('url')
+	frequency_list = count_words(key)
+	data = {'data': frequency_list}
+	return jsonify(data)
 # @app.route('/get_screenshot')
 # def get_screenshot():
 #     filename = request.args.get('url').rstrip('.com') + '.png'
 #     return filename
 
+@app.route('/word_count')
+def show_word_count():
+    return render_template('wordcount.html', sites=SITES_TO_VISIT)
 
+
+@app.route('/word_count.json')
+def get_word_count():
+    word = request.args.get('word')
+    sites = json.loads(request.args.get('sites'))
+    count = count_one_word(word, sites)
+    return jsonify(count)
+
+
+@app.route('/grid')
+def show_grid():
+    return render_template('grid.html', sites=SITES_TO_VISIT)
+
+
+@app.route('/example')
+def show_example():
+    return render_template('example.html', sites=SITES_TO_VISIT)
   
 if __name__ == "__main__":
 

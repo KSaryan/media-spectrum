@@ -1,0 +1,15 @@
+SITES_TO_VISIT = {'https://www.nytimes.com': {'pic': 'nytimes.png', 'name': 'New York Times'},
+				  'https://www.foxnews.com': {'pic': 'foxnews.png', 'name': 'Fox News'}, 
+				  'https://www.motherjones.com': {'pic': 'motherjones.png', 'name': 'Mother Jones'}, 
+				  'http://www.buzzfeednews.com': {'pic': 'buzzfeednews.png', 'name': 'Buzz Feed News'}, 
+				  'http://www.washingtonpost.com': {'pic': 'washingtonpost.png', 'name': 'Washington Post'}, 
+				  'https://www.reuters.com': {'pic': 'reuters.png', 'name': 'Reuters'}, 
+				  'https://www.axios.com': {'pic': 'axios.png', 'name': 'Axios'}, 
+				  'http://www.politico.com': {'pic': 'politico.png', 'name': 'Politico'}, 
+				  'https://www.wsj.com': {'pic': 'wsj.png', 'name': 'The Wall Street Journal'}, 
+				  'http://www.washingtontimes.com': {'pic': 'washingtontimes.png', 'name': 'The Washington Times'},
+				  'https://www.nypost.com': {'pic': 'nypost.png', 'name': 'New York Post'},
+				  'https://www.nationalreview.com': {'pic': 'nationalreview.png', 'name': 'The National Review'},
+				  'https://www.infowars.com': {'pic': 'infowars.png', 'name': 'Info Wars'},
+				  'http://www.breitbart.com': {'pic': 'breitbart.png', 'name': 'Breitbart'}
+				  }

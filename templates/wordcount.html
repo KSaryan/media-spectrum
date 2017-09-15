@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Media Spectrum</title>
+
+ 
+  
+</head>
+
+<body>
+ <form action="#" id='word-count'>
+ 	Enter a word:<input type='text' name='word' id='word'>\n
+ 	Choose some sites: 
+ 	<legend>Choose some sites</legend>
+ 		{% for site in sites %}
+	 		 <div>
+			    <input type="checkbox" name="sites" value= {{ site }}>
+			    <label for="nytimes">{{ sites[site]['name'] }}</label>
+	  		</div>
+  		{% endfor %}
+  	<input type='submit' name= "submit">
+  </form>
+
+  <div id='wcresults'><div>
+
+  
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript" src="/static/js/wordcountpage.js"></script>
+</body>
+
+</html>
