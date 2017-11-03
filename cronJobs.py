@@ -11,7 +11,6 @@ texts = {}
 
 
 def get_htmls():
-
     for site in SITES_TO_VISIT:
         print "Getting html"
         
@@ -21,21 +20,31 @@ def get_htmls():
         texts[site] = text
         pickle.dump( texts, open( "html_info.py", "wb" ) )
 
+    # schedule.every(1).minutes.do(job)
+
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
+
+
 
 from screenshot import *
 
-
 def make_screenshots():
-
+    print "Getting screenshot"
     sites = [get_screen_shot(
         url= site, filename=SITES_TO_VISIT[site]['pic'], path='./static/img',
         crop=True, crop_replace=False,
         thumbnail=True, thumbnail_replace=False,
         thumbnail_width=500, thumbnail_height=600,
-    ) for site in SITES_TO_VISIT.keys() ]
+        ) for site in SITES_TO_VISIT.keys() ]
+
+    
+    
 
 
 def run_jobs():
+
     gh = threading.Thread(name='get_htmls', target=get_htmls)
     ms = threading.Thread(name='make_screenshots', target=make_screenshots)
     gh.start()
@@ -43,8 +52,10 @@ def run_jobs():
 
 
 if __name__ == "__main__":
-    schedule.every(1).minutes.do(run_jobs)
+    # run_jobs()
 
-    while 1:
+    schedule.every(5).minutes.do(run_jobs)
+
+    while True:
         schedule.run_pending()
         time.sleep(1)

@@ -1,3 +1,4 @@
+// from https://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/
 /*!
  * imagesLoaded v3.0.2
  * JavaScript is all like "You images are done yet or what?"

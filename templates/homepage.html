@@ -1,23 +1,52 @@
-<!doctype html>
-<html>
-<head>
-  <title>Media Spectrum</title>
+{% extends 'base.html' %}
 
- 
+{% block content %}
+
+<div class="container">
+	<ul class="grid effect-4" id="grid">
+		{% for site in sites %}
+		  <li><img src="/static/img/crop_{{ sites[site]['pic'] }}" onclick="openModal();currentSlide({{loop.index}})"></li>
+		{% endfor %}
+	</ul>
+</div>
+
+
+<div id="myModal" class="modal">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+    {% for site in sites %}
+    <div class="mySlides">
+      <div class="numbertext"> {{loop.index}}/ 13</div>
+      <br><button><a href="/stats/{{sites[site]['route_name']}}">Get Stats</a></button>
+      <img src="/static/img/crop_{{sites[site]['pic']}}" style="width:100%">
+    </div>
+    {% endfor %}
+
+    
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    {% for site in sites %}
+      <div class="column">
+        <img class="demo cursor" src="/static/img/thumbnail_{{sites[site]['pic']}}" style="width:100%" onclick="currentSlide({{loop.index}})">
+      </div>
+    {% endfor %}
   
-</head>
 
-<body>
-	{% for site in sites %}
-	 	<button data-url= {{ sites[site]['pic'] }} class='npbtn'> {{sites[site]['name']}} </button> 
-  	{% endfor %}
+    
+  </div>
+</div>
+ {% endblock %}
 
-  	<div id='screenshot-display-div'> </div>
 
-  
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script type="text/javascript" src="/static/js/homepage.js"></script>
-</body>
-
-</html>
+{% block script %}
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script type="text/jacascript"  src="/static/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript"  src="/static/js/eventemitter.js"></script>
+<script type="text/javascript"  src="/static/js/imagesloaded.js"></script>
+<script type="text/javascript"  src="/static/js/classie.js"></script>
+<script type="text/javascript"  src="/static/js/modernizr.custom.js"></script>
+<script type="text/javascript"  src="/static/js/AnimOnScroll.js"></script>
+<script type="text/javascript"  src="/static/js/grid.js"></script>
+<script type="text/javascript"  src="/static/js/modal.js"></script>
+{% endblock %}

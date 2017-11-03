@@ -15,6 +15,7 @@ def execute_command(command):
 
 def do_screen_capturing(url, screen_path, width, height):
     print "Capturing screen.."
+    print url
     driver = webdriver.PhantomJS()
     time.sleep(1)
     # it save service log file in same directory
@@ -46,7 +47,7 @@ def do_thumbnail(params):
         'convert',
         params['crop_path'],
         '-filter', 'Lanczos',
-        '-thumbnail', '%sx%s' % (params['width'], params['height']),
+        '-thumbnail', '%sx%s' % (250, 300),
         params['thumbnail_path']
     ]
     execute_command(' '.join(command))

@@ -5,8 +5,8 @@ from flask import (Flask, render_template, redirect, request, flash,
 from sqlalchemy import update
 import json
 # from datetime import datetime, timedelta, date
-import requests
-import re
+# import requests
+# import re
 
 import os
 from functools import wraps
@@ -16,6 +16,9 @@ from selenium import webdriver
 import time
 from count import count_words, count_one_word
 from sites import SITES_TO_VISIT
+# from cronJobs import get_htmls, make_screenshots
+# import threading
+# import schedule
 
 
 app = Flask(__name__)
@@ -63,9 +66,9 @@ def get_time():
 
     return str(now)
 
-@app.route('/word_cloud')
-def show_word_cloud():
-	return render_template('wordcloud.html', sites=SITES_TO_VISIT)
+# @app.route('/word_cloud')
+# def show_word_cloud():
+# 	return render_template('wordcloud.html', sites=SITES_TO_VISIT)
 
 @app.route('/word_cloud.json')
 def get_word_cloud_info():
@@ -78,9 +81,9 @@ def get_word_cloud_info():
 #     filename = request.args.get('url').rstrip('.com') + '.png'
 #     return filename
 
-@app.route('/word_count')
-def show_word_count():
-    return render_template('wordcount.html', sites=SITES_TO_VISIT)
+# @app.route('/word_count')
+# def show_word_count():
+#     return render_template('wordcount.html', sites=SITES_TO_VISIT)
 
 
 @app.route('/word_count.json')
@@ -91,20 +94,35 @@ def get_word_count():
     return jsonify(count)
 
 
-@app.route('/grid')
-def show_grid():
-    return render_template('grid.html', sites=SITES_TO_VISIT)
+# @app.route('/grid')
+# def show_grid():
+#     return render_template('grid.html', sites=SITES_TO_VISIT)
 
 
-@app.route('/example')
-def show_example():
-    return render_template('example.html', sites=SITES_TO_VISIT)
+# @app.route('/example')
+# def show_example():
+#     return render_template('example.html', sites=SITES_TO_VISIT)
+
+@app.route('/stats/<site_name>')
+def show_site_info(site_name):
+    for site in SITES_TO_VISIT:
+        if SITES_TO_VISIT[site]['route_name'] == site_name:
+            site_url = site
+    return render_template('site-info.html', site_url=site_url, sites=SITES_TO_VISIT)  
   
 if __name__ == "__main__":
 
     app.debug = True
     # connect_to_db(app)
+    # def run_jobs(app):
+    #     gh = threading.Thread(name='get_htmls', target=get_htmls)
+    #     ms = threading.Thread(name='make_screenshots', target=make_screenshots)
+    #     app = threading.Thread(name='app', target=app.run(port=5000, host='0.0.0.0'))
+    #     app.start()
+    #     gh.start()
+    #     ms.start()
 
+    # run_jobs(app)
 
     app.run(port=5000, host='0.0.0.0')
 
