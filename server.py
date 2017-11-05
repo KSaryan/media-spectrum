@@ -72,10 +72,10 @@ def get_time():
 
 @app.route('/word_cloud.json')
 def get_word_cloud_info():
-	key = request.args.get('url')
-	frequency_list = count_words(key)
-	data = {'data': frequency_list}
-	return jsonify(data)
+    key = request.args.get('url')
+    frequency_dict = count_words(key)
+    print frequency_dict
+    return jsonify(frequency_dict)
 # @app.route('/get_screenshot')
 # def get_screenshot():
 #     filename = request.args.get('url').rstrip('.com') + '.png'

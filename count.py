@@ -2,7 +2,7 @@ from operator import itemgetter
 import pickle
 
 
-EXCLUDE_LIST = ['times', 'new', 'york', 'fox', 'news', 'that', 'that', 'what', 'this', 'with', 'from']
+EXCLUDE_LIST = ['advertisement', 'buzzfeed', 'times', 'new', 'york', 'fox', 'news', 'that', 'that', 'what', 'this', 'with', 'from', 'after']
 
 
 def count_words(key):
@@ -13,9 +13,10 @@ def count_words(key):
 		word = word.lower().rstrip('.,":;!?')
 		count[word]= count.get(word, 0) + 1
 	word_list = [(x, y) for x,y in count.items() if len(x) > 4 and x not in EXCLUDE_LIST]
-	word_list = sorted(word_list, key=itemgetter(1))
-	frequency_list = [{"text": x,"size":y * 5} for x, y in word_list]
-	return frequency_list[-75:]
+	word_list = sorted(word_list, key=itemgetter(1))[-25:]
+	frequency_dict = [{"text": x,"size":y * 5} for x, y in word_list]
+	frequency_dict = {x:y for x, y in word_list}
+	return frequency_dict
 
 
 def count_one_word(word, sites):
