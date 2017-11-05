@@ -2,11 +2,13 @@ from operator import itemgetter
 import pickle
 
 
-EXCLUDE_LIST = ['advertisement', 'buzzfeed', 'times', 'new', 'york', 'fox', 'news', 'that', 'that', 'what', 'this', 'with', 'from', 'after']
+EXCLUDE_LIST = ['advertisement', 'buzzfeed', 'times','after']
 
+def open_file(file_name):
+	return pickle.load( open(file_name, "rb" ) )
 
 def count_words(key):
-	texts = pickle.load( open( "html_info.py", "rb" ) )
+	texts = open_file("html_info.py")
 	text = texts[key]
 	count = {}
 	for word in text.split(" "):
@@ -20,7 +22,7 @@ def count_words(key):
 
 
 def count_one_word(word, sites):
-	texts = pickle.load( open( "html_info.py", "rb" ) )
+	texts = open_file("html_info.py")
 	counts = {}
 	word = word.lower()
 	for site in sites:
@@ -33,4 +35,3 @@ def count_one_word(word, sites):
 		counts[site] = count
 
 	return counts
-

@@ -4,28 +4,22 @@ import urllib
 import pickle
 import threading
 from html import *
-from sites import SITES_TO_VISIT
+from model import Site
 
 texts = {}
 
 
 
 def get_htmls():
-    for site in SITES_TO_VISIT:
+    urls = db.session.query(Site.url).all()
+
+    for url in urls:
         print "Getting html"
         
-        url = site
         html = urllib.urlopen(url).read()
         text = (text_from_html(html))
         texts[site] = text
         pickle.dump( texts, open( "html_info.py", "wb" ) )
-
-    # schedule.every(1).minutes.do(job)
-
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(1)
-
 
 
 from screenshot import *
@@ -52,7 +46,6 @@ def run_jobs():
 
 
 if __name__ == "__main__":
-    # run_jobs()
 
     schedule.every(5).minutes.do(run_jobs)
 

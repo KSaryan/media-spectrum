@@ -10,7 +10,7 @@ import json
 
 import os
 from functools import wraps
-from screenshot import *
+# from screenshot import *
 from subprocess import Popen, PIPE
 from selenium import webdriver
 import time
