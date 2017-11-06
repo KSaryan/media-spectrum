@@ -63,6 +63,18 @@ def connect_to_db(app, db_uri = "postgres:///medias"):
     db.init_app(app)
 
 
+def example_data():
+    """sample data for testing"""
+
+    bf_html = "People think buzzfeed only talks about silly things, but they\'re not always silly"
+    fn_html = "Fox News uses a lot of words many times. Words are important and places too."
+    bf = Site(site_name="BuzzFeed", route_name="BuzzFeed", pic_name="buzzfeed.png", url="http://www.buzzfeednews.com", html=bf_html)
+    fn = Site(site_name="Fox News", route_name="FoxNews", pic_name="foxnews.png", url="https://www.foxnews.com", html=fn_html)
+    
+    db.session.add_all([bf, fn])
+    db.session.commit()
+
+
 if __name__ == "__main__":
     app = Flask(__name__)
     connect_to_db(app)

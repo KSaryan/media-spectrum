@@ -18,10 +18,6 @@ app = Flask(__name__)
 app.secret_key = "ABC"
 
 
-
-
-
-
 # def login_required(f):
 #     @wraps(f)
 #     def decorated_function(*args, **kwargs):
@@ -50,22 +46,25 @@ app.secret_key = "ABC"
 
 @app.route('/')
 def display_homepage():
-    """Displas hoempage"""
+    """displays hoempage"""
+
     sites = Site.query.all()
     return render_template('homepage.html', sites=sites)
 
+
 @app.route('/get_time')
 def get_time():
+    """returns current time"""
+
     now = time.time()
 
     return str(now)
 
-# @app.route('/word_cloud')
-# def show_word_cloud():
-# 	return render_template('wordcloud.html', sites=SITES_TO_VISIT)
 
-@app.route('/word_cloud.json')
-def get_word_cloud_info():
+@app.route('/word_frequency.json')
+def get_frequent_words():
+    """returns dictionary of most frequent words in a site"""
+
     url = request.args.get('url')
     site = Site.query.filter_by(url=url).first()
     frequency_dict = count_words(site)
@@ -74,6 +73,8 @@ def get_word_cloud_info():
 
 @app.route('/word_count.json')
 def get_word_count():
+    """returns how often a word shows up in chosen sites"""
+
     word = request.args.get('word')
     urls = ast.literal_eval(request.args.getlist('sites')[0])
     sites = []
@@ -86,6 +87,8 @@ def get_word_count():
 
 @app.route('/stats/<site_name>')
 def show_site_info(site_name):
+    """returns site info page"""
+
     site = Site.query.filter_by(route_name=site_name).first()
     site_url = site.url
     sites = Site.query.all()

@@ -92,7 +92,7 @@ function getFreqObj(){
     // sending AJAX request to get word frequescy object for this site
     var url = $('#hiddendiv').val();
     var data = {url: url}
-    $.get('/word_cloud.json', data, displayWordCount)
+    $.get('/word_frequency.json', data, displayWordCount)
 }
 
 // event listeners

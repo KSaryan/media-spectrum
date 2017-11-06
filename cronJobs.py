@@ -9,7 +9,6 @@ from model import Site, db, connect_to_db
 texts = {}
 
 
-
 def get_htmls():
     sites = Site.query.all()
 
@@ -20,7 +19,6 @@ def get_htmls():
         text = (text_from_html(html))
         site.html = text
         db.session.commit()
-        # pickle.dump( texts, open( "html_info.py", "wb" ) )
 
 
 from screenshot import *
@@ -36,9 +34,6 @@ def make_screenshots():
         thumbnail=True, thumbnail_replace=False,
         thumbnail_width=500, thumbnail_height=600,
         ) for site in sites]
-
-    
-    
 
 
 def run_jobs():
