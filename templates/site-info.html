@@ -2,8 +2,7 @@
 
 {% block head %}
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="/static/js/wordcloud.js"></script>
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 {% endblock %}
 
@@ -36,17 +35,17 @@
 
         <!-- Multiple Checkboxes -->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="checkboxes">Choose SItes to Compare</label>
+          <label class="col-md-4 control-label" for="checkboxes">Choose Sites to Compare</label>
           <div class="col-md-4">
             {% for site in sites %}
                 <div class="checkbox">
-                    <label for={{ sites[site]['name'] }} >
-                        {% if site == site_url %}
-                            <input type="checkbox" name="sites" id="#"{{ sites[site]['name'] }} value= {{ site }} checked='checked'>
-                            {{ sites[site]['name'] }}
+                    <label for={{ site.site_name }} >
+                        {% if site.url == site_url %}
+                            <input type="checkbox" name="sites" id="#"{{ site.site_name }} value= {{ site.url }} checked='checked'>
+                            {{ site.site_name }}
                         {%else%}
-                            <input type="checkbox" name="sites" id="#"{{ sites[site]['name'] }} value= {{ site }}>
-                            {{ sites[site]['name'] }}
+                            <input type="checkbox" name="sites" id="#"{{ site.site_name }} value= {{ site.url }}>
+                            {{ site.site_name }}
                         {% endif %}
                     </label>
                 </div>
@@ -73,7 +72,7 @@
 
 {% block script %}
 
-<!-- <script type="text/javascript" src="/static/js/wordcloudpage.js"></script> -->
+
 <script type="text/javascript" src="/static/js/wordcountpage.js"></script>
 
 {% endblock %}

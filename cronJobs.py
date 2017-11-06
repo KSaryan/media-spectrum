@@ -4,34 +4,38 @@ import urllib
 import pickle
 import threading
 from html import *
-from model import Site
+from model import Site, db, connect_to_db
 
 texts = {}
 
 
 
 def get_htmls():
-    urls = db.session.query(Site.url).all()
+    sites = Site.query.all()
 
-    for url in urls:
+    for site in sites:
         print "Getting html"
-        
+        url = site.url
         html = urllib.urlopen(url).read()
         text = (text_from_html(html))
-        texts[site] = text
-        pickle.dump( texts, open( "html_info.py", "wb" ) )
+        site.html = text
+        db.session.commit()
+        # pickle.dump( texts, open( "html_info.py", "wb" ) )
 
 
 from screenshot import *
 
 def make_screenshots():
     print "Getting screenshot"
+
+    sites = Site.query.all()
+
     sites = [get_screen_shot(
-        url= site, filename=SITES_TO_VISIT[site]['pic'], path='./static/img',
+        url= site.url, filename=site.pic_name, path='./static/img',
         crop=True, crop_replace=False,
         thumbnail=True, thumbnail_replace=False,
         thumbnail_width=500, thumbnail_height=600,
-        ) for site in SITES_TO_VISIT.keys() ]
+        ) for site in sites]
 
     
     
@@ -46,8 +50,10 @@ def run_jobs():
 
 
 if __name__ == "__main__":
+    from server import app
+    connect_to_db(app)
 
-    schedule.every(5).minutes.do(run_jobs)
+    schedule.every(1).minutes.do(run_jobs)
 
     while True:
         schedule.run_pending()

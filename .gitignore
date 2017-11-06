@@ -5,3 +5,4 @@ secrets.sh
 package*
 node_modules/
 ghostdriver.log
+/static/img/*

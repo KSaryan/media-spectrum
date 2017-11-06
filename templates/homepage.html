@@ -5,7 +5,7 @@
 <div class="container">
 	<ul class="grid effect-4" id="grid">
 		{% for site in sites %}
-		  <li><img src="/static/img/crop_{{ sites[site]['pic'] }}" onclick="openModal();currentSlide({{loop.index}})"></li>
+		  <li><img src="/static/img/crop_{{ site.pic_name }}" onclick="openModal();currentSlide({{loop.index}})"></li>
 		{% endfor %}
 	</ul>
 </div>
@@ -17,8 +17,8 @@
     {% for site in sites %}
     <div class="mySlides">
       <div class="numbertext"> {{loop.index}}/ 13</div>
-      <br><button><a href="/stats/{{sites[site]['route_name']}}">Get Stats</a></button>
-      <img src="/static/img/crop_{{sites[site]['pic']}}" style="width:100%">
+      <br><button><a href="/stats/{{site.route_name}}">Get Stats</a></button>
+      <img src="/static/img/crop_{{site.pic_name}}" style="width:100%">
     </div>
     {% endfor %}
 
@@ -28,7 +28,7 @@
 
     {% for site in sites %}
       <div class="column">
-        <img class="demo cursor" src="/static/img/thumbnail_{{sites[site]['pic']}}" style="width:100%" onclick="currentSlide({{loop.index}})">
+        <img class="demo cursor" src="/static/img/thumbnail_{{site.pic_name}}" style="width:100%" onclick="currentSlide({{loop.index}})">
       </div>
     {% endfor %}
   

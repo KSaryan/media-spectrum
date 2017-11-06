@@ -28,6 +28,7 @@ class Site(db.Model):
     route_name = db.Column(db.String(25), nullable=False)
     pic_name = db.Column(db.String(25), nullable=False)
     url = db.Column(db.String(75), nullable=False)
+    html = db.Column(db.Text)
 
     def __repr__(self):
         """Displayed when called"""

@@ -4,12 +4,12 @@ import pickle
 
 EXCLUDE_LIST = ['advertisement', 'buzzfeed', 'times','after']
 
-def open_file(file_name):
-	return pickle.load( open(file_name, "rb" ) )
+# def open_file(file_name):
+# 	return pickle.load( open(file_name, "rb" ) )
 
-def count_words(key):
-	texts = open_file("html_info.py")
-	text = texts[key]
+def count_words(site):
+	# texts = open_file("html_info.py")
+	text = site.html
 	count = {}
 	for word in text.split(" "):
 		word = word.lower().rstrip('.,":;!?')
@@ -22,16 +22,16 @@ def count_words(key):
 
 
 def count_one_word(word, sites):
-	texts = open_file("html_info.py")
+	# texts = open_file("html_info.py")
 	counts = {}
 	word = word.lower()
 	for site in sites:
 		count = 0
-		text = texts[site]
+		text = site.html
 		for w in text.split(" "):
 			w = w.lower().rstrip('.,":;!?')
 			if w == word:
 				count += 1
-		counts[site] = count
+		counts[site.site_name] = count
 
 	return counts

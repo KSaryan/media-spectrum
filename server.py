@@ -4,22 +4,15 @@ from flask import (Flask, render_template, redirect, request, flash,
                    session, url_for, g)
 from sqlalchemy import update
 import json
-# from datetime import datetime, timedelta, date
-# import requests
-# import re
 
 import os
 from functools import wraps
-# from screenshot import *
 from subprocess import Popen, PIPE
 from selenium import webdriver
 import time
 from count import count_words, count_one_word
-from sites import SITES_TO_VISIT
-# from cronJobs import get_htmls, make_screenshots
-# import threading
-# import schedule
-
+from model import db, connect_to_db, User, Site, FaveSite
+import ast
 
 app = Flask(__name__)
 app.secret_key = "ABC"
@@ -58,7 +51,8 @@ app.secret_key = "ABC"
 @app.route('/')
 def display_homepage():
     """Displas hoempage"""
-    return render_template('homepage.html', sites=SITES_TO_VISIT)
+    sites = Site.query.all()
+    return render_template('homepage.html', sites=sites)
 
 @app.route('/get_time')
 def get_time():
@@ -72,48 +66,35 @@ def get_time():
 
 @app.route('/word_cloud.json')
 def get_word_cloud_info():
-    key = request.args.get('url')
-    frequency_dict = count_words(key)
-    print frequency_dict
+    url = request.args.get('url')
+    site = Site.query.filter_by(url=url).first()
+    frequency_dict = count_words(site)
     return jsonify(frequency_dict)
-# @app.route('/get_screenshot')
-# def get_screenshot():
-#     filename = request.args.get('url').rstrip('.com') + '.png'
-#     return filename
-
-# @app.route('/word_count')
-# def show_word_count():
-#     return render_template('wordcount.html', sites=SITES_TO_VISIT)
 
 
 @app.route('/word_count.json')
 def get_word_count():
     word = request.args.get('word')
-    sites = json.loads(request.args.get('sites'))
+    urls = ast.literal_eval(request.args.getlist('sites')[0])
+    sites = []
+    for url in urls:
+        site = Site.query.filter_by(url=url).first()
+        sites.append(site)
     count = count_one_word(word, sites)
     return jsonify(count)
 
 
-# @app.route('/grid')
-# def show_grid():
-#     return render_template('grid.html', sites=SITES_TO_VISIT)
-
-
-# @app.route('/example')
-# def show_example():
-#     return render_template('example.html', sites=SITES_TO_VISIT)
-
 @app.route('/stats/<site_name>')
 def show_site_info(site_name):
-    for site in SITES_TO_VISIT:
-        if SITES_TO_VISIT[site]['route_name'] == site_name:
-            site_url = site
-    return render_template('site-info.html', site_url=site_url, sites=SITES_TO_VISIT)  
+    site = Site.query.filter_by(route_name=site_name).first()
+    site_url = site.url
+    sites = Site.query.all()
+    return render_template('site-info.html', site_url=site_url, sites=sites)  
   
 if __name__ == "__main__":
 
     app.debug = True
-    # connect_to_db(app)
+    connect_to_db(app)
     # def run_jobs(app):
     #     gh = threading.Thread(name='get_htmls', target=get_htmls)
     #     ms = threading.Thread(name='make_screenshots', target=make_screenshots)
