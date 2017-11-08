@@ -11,7 +11,8 @@ def count_words(site):
 	text = site.html
 	count = {}
 	# get count for each word and add to count dict
-	for word in text.split(" "):
+	text = [word for word in text.split(" ") if word != '']
+	for word in text:
 		word = word.lower().rstrip('.,":;!?')
 		count[word]= count.get(word, 0) + 1
 	# turning dict into list of tuples and sorting

@@ -1,12 +1,12 @@
 import schedule
 import time
-import urllib
+import urllib2
 import pickle
 import threading
 from html import *
 from model import Site, db, connect_to_db
-
-texts = {}
+import requests
+import cookielib
 
 
 def get_htmls():
@@ -15,10 +15,21 @@ def get_htmls():
     for site in sites:
         print "Getting html"
         url = site.url
-        html = urllib.urlopen(url).read()
-        text = (text_from_html(html))
-        site.html = text
-        db.session.commit()
+
+        try:
+            html = requests.get(url).text
+            html_lst = html.split('\x00')
+            html_str = "".join(html_lst)
+            text = (text_from_html(html_str))
+            site.html = text
+            db.session.commit()
+
+        except Exception as inst:
+            print type(inst)
+            print inst.args
+            print inst 
+            print "I'm a problem"
+            print url
 
 
 from screenshot import *
@@ -45,11 +56,11 @@ def run_jobs():
 
 
 if __name__ == "__main__":
+
+    schedule.every(5).minutes.do(run_jobs)
     from server import app
     connect_to_db(app)
-
-    schedule.every(1).minutes.do(run_jobs)
-
-    while True:
+    while True:   
         schedule.run_pending()
         time.sleep(1)
+
