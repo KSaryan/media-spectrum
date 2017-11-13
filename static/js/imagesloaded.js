@@ -48,7 +48,6 @@ function makeArray( obj ) {
 // --------------------------  -------------------------- //
 
 function defineImagesLoaded( EventEmitter, eventie ) {
-
   /**
    * @param {Array, Element, NodeList, String} elem
    * @param {Object or Function} options - if function, use as callback
@@ -268,6 +267,7 @@ function defineImagesLoaded( EventEmitter, eventie ) {
 
 if ( typeof define === 'function' && define.amd ) {
   // AMD
+  debugger;
   define( [
       'eventEmitter',
       'eventie'

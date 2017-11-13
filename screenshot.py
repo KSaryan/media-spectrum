@@ -17,7 +17,6 @@ def do_screen_capturing(url, screen_path, width, height):
     print "Capturing screen.."
     print url
     driver = webdriver.PhantomJS()
-    time.sleep(1)
     # it save service log file in same directory
     # if you want to have log file stored else where
     # initialize the webdriver.PhantomJS() as
@@ -28,6 +27,10 @@ def do_screen_capturing(url, screen_path, width, height):
     driver.get(url)
     time.sleep(40)
     driver.save_screenshot(screen_path)
+    try:
+        driver.quit()
+    except:
+        pass
 
 
 def do_crop(params):

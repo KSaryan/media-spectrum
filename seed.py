@@ -5,7 +5,8 @@ from model import connect_to_db, db
 import pickle
 
 
-SITES_TO_VISIT = {'https://www.nytimes.com': {'pic': 'nytimes.png', 'name': 'New York Times', 'route_name': 'NYT'},
+SITES_TO_VISIT = {
+                  'https://www.nytimes.com': {'pic': 'nytimes.png', 'name': 'New York Times', 'route_name': 'NYT'},
                   'https://www.foxnews.com': {'pic': 'foxnews.png', 'name': 'Fox News', 'route_name': 'FoxNews'}, 
                   'https://www.motherjones.com': {'pic': 'motherjones.png', 'name': 'Mother Jones', 'route_name': 'MotherJones'}, 
                   'http://www.buzzfeednews.com': {'pic': 'buzzfeednews.png', 'name': 'BuzzFeed News', 'route_name': 'BuzzFeed'}, 
