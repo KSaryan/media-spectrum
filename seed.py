@@ -15,7 +15,7 @@ SITES_TO_VISIT = {
                   'https://www.axios.com': {'pic': 'axios.png', 'name': 'Axios', 'route_name': 'Axios'}, 
                   'http://www.politico.com': {'pic': 'politico.png', 'name': 'Politico', 'route_name': 'Politico'}, 
                   'https://www.wsj.com': {'pic': 'wsj.png', 'name': 'The Wall Street Journal', 'route_name': 'WSJ'}, 
-                  'http://www.washingtontimes.com': {'pic': 'washingtontimes.png', 'name': 'The Washington Times', 'route_name': 'WashingtonTimes'},
+                  'https://www.washingtontimes.com': {'pic': 'washingtontimes.png', 'name': 'The Washington Times', 'route_name': 'WashingtonTimes'},
                   'https://www.nypost.com': {'pic': 'nypost.png', 'name': 'New York Post', 'route_name': 'NYP'},
                   'http://www.nationalreview.com': {'pic': 'nationalreview.png', 'name': 'The National Review', 'route_name': 'NationalReview'},
                   'https://www.infowars.com': {'pic': 'infowars.png', 'name': 'Info Wars', 'route_name': 'InfoWars'},

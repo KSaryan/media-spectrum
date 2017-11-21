@@ -27,10 +27,10 @@ def do_screen_capturing(url, screen_path, width, height):
     driver.get(url)
     time.sleep(40)
     driver.save_screenshot(screen_path)
-    try:
-        driver.quit()
-    except:
-        pass
+    # try:
+    #     driver.quit()
+    # except:
+    #     pass
 
 
 def do_crop(params):

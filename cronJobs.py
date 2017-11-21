@@ -47,17 +47,22 @@ def make_screenshots():
         ) for site in sites]
 
 
-def run_jobs():
+# def run_jobs():
 
-    gh = threading.Thread(name='get_htmls', target=get_htmls)
-    ms = threading.Thread(name='make_screenshots', target=make_screenshots)
-    gh.start()
-    ms.start()
+#     gh = threading.Thread(name='get_htmls', target=get_htmls)
+#     ms = threading.Thread(name='make_screenshots', target=make_screenshots)
+#     gh.start()
+#     ms.start()
+
+def run_jobs():
+    get_htmls()
+    make_screenshots()
+
 
 
 if __name__ == "__main__":
 
-    schedule.every(5).minutes.do(run_jobs)
+    schedule.every(60).minutes.do(run_jobs)
     from server import app
     connect_to_db(app)
     while True:   
