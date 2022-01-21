@@ -26,7 +26,7 @@ idna==2.6
 import-string==0.1.0
 ipaddress==1.0.18
 ipykernel==4.6.1
-ipython==5.4.1
+ipython==7.16.3
 ipython-genutils==0.2.0
 itsdangerous==0.24
 Jinja==1.2
